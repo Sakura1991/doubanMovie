@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 class="page-header">{{title}}</h1>
+    <div class="list-group">
+        <a href="#/detail/{{item.id}}" class="list-group-item " ng-repeat="item in subjects">
+            <span class="badge">{{item.rating.average}}</span>
+
+            <div class="media">
+                <div class="media-left">
+                    <img class="media-object" ng-src={{item.images.small}} alt="...">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">名称:{{item.title}}</h4>
+                    <p>导演:<span ng-repeat="d in item.directors">{{d.name}}<span ng-if="!$last">,</span></span></p>
+                    <p>类型:<span >{{item.genres.join(',')}}</span></p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div ng-show="subjects.length">
+        <p>总共{{total}}条电影,共{{totalPage}}页</p>
+        <nav>
+            <ul class="pager">
+                <li ng-class="{disabled:currentPage == 1}" ><a  ng-click="handlePage(currentPage - 1)" >上一页</a></li>
+                <li ng-class="{disabled:currentPage == totalPage}"><a  ng-click="handlePage(currentPage + 1)">下一页</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!--加载动画-->
+    <div class="mask" ng-hide="subjects.length">
+        <div class="loading">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+
+</body>
+</html>
